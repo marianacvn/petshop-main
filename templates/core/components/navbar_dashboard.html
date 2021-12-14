@@ -1,0 +1,12 @@
+{% extends 'core/components/navbar.html' %}
+{% block navbar_contents %}
+    <ul class="navbar-nav ml-auto">
+        {% url 'home:update-client' request.user.client.id as current %}
+        <li class="nav-item {% if request.path == current %} active {% endif %}"><a
+                href="{% url 'home:update-client'  request.user.client.id %}" class="nav-link">Cadastro</a></li>
+
+        {% url 'home:register-schedule' as current %}
+        <li class="nav-item {% if request.path == current %} active {% endif %}"><a
+                href="{% url 'home:register-schedule' %}" class="nav-link">Agendamento</a></li>
+    </ul>
+{% endblock %}

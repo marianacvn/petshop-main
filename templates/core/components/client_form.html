@@ -1,0 +1,21 @@
+{% load crispy_forms_filters %}
+<div class="border rounded bg-white">
+    <div class="d-flex justify-content-between">
+        <h3 class="font-weight-bold">Formulário do Cliente</h3>
+    </div>
+    <form id="save-client" method="POST">
+        {% csrf_token %}
+        <div class="row p-0 m-0">
+            <div class="col-lg-6 col-sm-12">
+                {{ form|crispy }}
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                {{ client_form|crispy }}
+            </div>
+        </div>
+    </form>
+    <div class="mt-5 text-center">
+        <button form="save-client" type="submit" class="w-100 btn btn-success"><i></i>Salvar</button>
+    </div>
+
+</div>

@@ -1,0 +1,77 @@
+<form class="d-none" id="logout" action="{% url 'home:logout' %}" method="POST">{% csrf_token %}</form>
+<div class="wrap">
+    <div class="container">
+        <div class="row justify-content-between">
+            <div class="col-sm-12 col-md-6">
+                <p class="mb-0 phone pl-md-2 text-center text-md-left">
+                    <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +55 (87) 3831-1097 </a>
+                    <a href="#"><span class="fa fa-paper-plane mr-1"></span>sac@petscastle.com.br</a>
+                </p>
+            </div>
+            <div class="col-sm-12 col-md-6 d-flex justify-content-lg-end justify-content-sm-center">
+                <div class="social-media">
+                    <p class="mb-0 d-flex">
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span
+                                class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span
+                                class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                        <a href="#" class="d-flex align-items-center justify-content-center"><span
+                                class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                    </p>
+                </div>
+                {% if request.user.is_authenticated %}
+                    <div class="p-2 d-flex justify-content-center align-items-center">
+                        <h6 class="text-center text-white">Bem vindo(a), {{ request.user.username }}!!
+                            <button type="submit" form="logout" class="btn btn-outline-light p-1 ml-2"
+                                    onclick="return confirm('deseja realmente sair?')"><span
+                                    class="fa fa-sign-out"></span>sair
+                            </button>
+                        </h6>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+
+    <div class="container">
+        {% url 'home:contact' as current %}
+        <a class="navbar-brand {% if request.path == current %} active {% endif %}"
+           href="{% url 'home:contact' %}"><span class="flaticon-pawprint-1 mr-2"></span>Pet's Castle</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav"
+                aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars"></span> Menu
+        </button>
+
+        <div class="collapse navbar-collapse" id="ftco-nav">
+
+            {% block navbar_contents %}
+
+                <ul class="navbar-nav ml-auto">
+                    {% url 'home:contact' as current %}
+                    <li class="nav-item {% if request.path == current %} active {% endif %}"><a
+                            href="{% url 'home:contact' %}" class="nav-link">Contato</a></li>
+                    <li class="nav-item"><a href="{% url 'home:contact' %}#contato" class="nav-link">Quem somos</a></li>
+                    {% url 'home:products' as current %}
+                    <li class="nav-item {% if request.path == current %} active {% endif %}"><a
+                            href="{% url 'home:products' %}" class="nav-link">Produtos</a></li>
+                    {% url 'home:services' as current %}
+                    <li class="nav-item {% if request.path == current %} active {% endif %}"><a
+                            href="{% url 'home:services' %}" class="nav-link">Serviços</a></li>
+                    {% url 'home:login' as current %}
+                    <li class="nav-item {% if request.path == current %} active {% endif %}"><a
+                            href="{% url 'home:login' %}" class="nav-link">Login</a></li>
+                    {% if request.user.is_authenticated %}
+                        <li class="nav-item {% if request.path == current %} active {% endif %}"><a
+                                href="{% url 'home:dashboard' %}" class="nav-link">Dashboard</a></li>
+                    {% endif %}
+                </ul>
+            {% endblock navbar_contents %}
+        </div>
+    </div>
+</nav>

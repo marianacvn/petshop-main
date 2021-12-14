@@ -1,0 +1,77 @@
+{% extends 'core/layout/base.html' %}
+{% block content %}
+    <div class="hero-wrap js-fullheight" style=""
+         data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row no-gutters slider-text js-fullheight align-items-center justify-content-center"
+                 data-scrollax-parent="true">
+                <div class="col-md-11 ftco-animate text-center">
+                    <!--<h1 class="mb-4">Highest Quality Care For Pets You'll Love </h1>-->
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+{% block footer %}
+    <footer class="footer">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div id="sobre" class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                    <h2 class="footer-heading">Pet's Castle</h2>
+                    <p>Sabemos que cada laço é único. Fonte de alegria, evolução, bem-estar. Temos experiência e
+                        oferecemos
+                        espaços, produtos e serviços – e tudo mais que for preciso – para que a relação entre pets e
+                        suas
+                        famílias seja melhor a cada dia. Essa é nossa razão de ser.</p>
+                    <p>Somos a Pet's Castle, seu pet center de estimação!</p>
+                    <ul class="ftco-footer-social p-0">
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                                                    title="Twitter"><span class="fa fa-twitter"></span></a></li>
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                                                    title="Facebook"><span class="fa fa-facebook"></span></a></li>
+                        <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top"
+                                                    title="Instagram"><span class="fa fa-instagram"></span></a></li>
+                    </ul>
+                </div>
+                <div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
+                    <h2 class="footer-heading">Links Rápidos</h2>
+                    <ul class="list-unstyled">
+                        <li><a href="" class="py-2 d-block">Pet's Castle</a></li>
+                        <li><a href="" class="py-2 d-block">Contato</a></li>
+                        <li><a href="{% url 'home:contact' %}#contato" class="py-2 d-block">Quem Somos</a></li>
+                        {% url 'home:products' as current %}
+                        <li class="nav-item {% if request.path == current %} active {% endif %}"><a
+                                href="{% url 'home:products' %}" class="py-2 d-block">Produtos</a></li>
+                        {% url 'home:services' as current %}
+                        <li class="nav-item {% if request.path == current %} active {% endif %}"><a
+                                href="{% url 'home:services' %}" class="py-2 d-block">Serviços</a></li>
+                        {% url 'home:login' as current %}
+                        <li class="nav-item {% if request.path == current %} active {% endif %}"><a
+                                href="{% url 'home:login' %}" class="py-2 d-block">Login</a></li>
+                    </ul>
+                </div>
+                <div id="contato" class="col-md-6 col-lg-3 mb-4 mb-md-0">
+                    <h2 class="footer-heading">Tem dúvidas?</h2>
+                    <div class="block-23 mb-3">
+                        <ul>
+                            <li><span class="icon fa fa-map"></span><span class="text">Av. Dr. Ademar Xavier, 1097, Nossa Senhora da Conceição, Serra Talhada, PE, Brasil</span>
+                            </li>
+                            <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+55 (87)
+									3831-1097</span></a></li>
+                            <li><a href="#"><span class="icon fa fa-paper-plane"></span><span
+                                    class="text">sac@petscastle.com.br</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-5">
+                <div class="col-md-12 text-center">
+                    <p class="copyright">
+                        Copyright &copy; 2021 Pet's Castle <i class="flaticon-pawprint-1 mr-2" aria-hidden="true"></i>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+{% endblock footer %}

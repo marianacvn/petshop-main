@@ -1,0 +1,80 @@
+{% extends 'home/dashboard.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container">
+        <div class="row mb-5 col-lg-12">
+            <div class="text-center col-lg-8">
+                <h3 class="font-weight-bold">Agendamento</h3>
+                <p>Trabalhamos de segunda à sexta, das 7 horas da manhã até às 6 horas e 30 minutos da tarde</p>
+                <p>Fale conosco através do fone: +55 (87) 3831-1097</p>
+
+            </div>
+            <div class="col-sm-8 col-lg-4">
+                <form id="register-schedule" action="{% url 'home:register-schedule' %}" method="POST">
+                    {% csrf_token %}
+                    {% crispy form %}
+                    <button form="register-schedule" class="btn btn-success w-100" type="submit">Enviar</button>
+                </form>
+            </div>
+        </div>
+        <div class="m-auto">
+            <div class="mb-5" style="min-height: 150px;">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th style="width:120px;" class="align-items-center">
+                            <label for="main_checkbox"></label><input id="main_checkbox" class="mr-2" type="checkbox"
+                                                                      onchange="selectAll(this)">Serviço
+                        </th>
+                        <th style="width:120px;">Valor (R$)
+                        </th>
+                        <th style="width:270px;">Data</th>
+                        <td style="width:30px">Executado</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for schedule in schedules %}
+                        <tr>
+                            <td style="width:120px;" class="align-items-center">
+                                <label for="{{ schedule.id }}"></label><input type="checkbox" class="checkbox mr-2"
+                                                                              id="{{ schedule.id }}"
+                                                                              onchange="updateMainCheckbox()">{{ schedule.service.service }}
+                            </td>
+                            <td style="width:120px">{{ schedule.service.value|stringformat:'.2f' }}</td>
+                            <td style="width:270px">{{ schedule.date|date:'l, d/m/Y à\s h:i A' }}</td>
+                            <td style="width:30px">{% if schedule.accomplished %} Sim {% else %} Não {% endif %}</td>
+                        </tr>
+                    {% empty %}
+                        <h4 class="text-danger">Sem registros de agendamento</h4>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <button type="submit" id="cancel-schedule" class="btn btn-outline-danger">Cancelar selecionados</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function selectAll(checkbox) {
+            let elements = document.getElementsByClassName('checkbox');
+            for (const element of elements) {
+                element.checked = checkbox.checked;
+            }
+        }
+
+        function updateMainCheckbox() {
+            let checked = true;
+            let elements = document.getElementsByClassName('checkbox');
+            let mainCheckbox = document.getElementById("main_checkbox");
+            for (const element of elements) {
+                if (!element.checked) {
+                    checked = false;
+                }
+            }
+            mainCheckbox.checked = checked;
+
+        }
+    </script>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'core/layout/base.html' %}
+{% load static %}
+{% load static %}
+{% block navbar %}
+    {% include 'core/components/navbar_dashboard.html' %}
+{% endblock navbar %}
+
+{% block content %}
+
+    <div class="col-sm-12 col-lg-5 m-auto">
+        <img class="w-100" src="{% static 'images/cão_e_gato_tendo_um_banho.jpeg' %}" alt="">
+    </div>
+{% endblock %}

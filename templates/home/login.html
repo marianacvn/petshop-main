@@ -1,0 +1,26 @@
+{% extends 'core/layout/base_fullscreen.html' %}
+{% load static %}
+{% block content %}
+    <div class="background-gradient" style="height: 100vh;">
+        <div class="bg-white rounded p-3"
+             style="position: relative; top: 50%; left: 50%; transform: translate(-50%, -50%); width:380px;">
+            <div class="text-center">
+                <img width="128px" src="{% static 'images/logo-castle-min.png' %}" alt="logo">
+            </div>
+            <form method="POST" action="{% url 'home:login' %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{ request.GET.next }}">
+                <label class="w-100">
+                    <input class="form-control" placeholder="nickname" type="text" name="username">
+                </label>
+                <label class="w-100">
+                    <input class="form-control mt-2" placeholder="senha" type="password" name="password">
+                </label>
+                <div class="mt-5 d-flex justify-content-around">
+                    <input class="btn btn-primary" type="submit" value="Entrar">
+                    <a href="{% url 'home:register-client' %}">Não tenho uma conta</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock content %}

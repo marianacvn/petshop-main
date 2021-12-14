@@ -1,0 +1,38 @@
+{% extends 'core/layout/base.html' %}
+{% load static %}
+{% block content %}
+    <div class="">
+        <div class="ml-5 mr-5 mt-5">
+            <form>
+
+                <div class="input-group">
+                    <label for=""></label><input class="form-control form-control-sm" type="search"
+                                                 placeholder="Digita aqui o produto que você deseja buscar"
+                                                 name="search" id="" value="{{ request.GET.search }}">
+                    <div class="input-group-append">
+                        <input class="btn btn-primary" type="submit" value="buscar">
+                    </div>
+                </div>
+            </form>
+            <div class="d-flex flex-wrap justify-content-start">
+                {% for obj in products %}
+                    <div class="d-flex flex-wrap justify-content-center">
+                        <div class="card m-2" style="width: 18rem;">
+                            <img class="card-img-top" height="200px"
+                                 src="{% if obj.photo.file != None %}{{ obj.photo.url }}{% else %}{{ obj.photo }}{% endif %}"
+                                 alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ obj.name }}</h5>
+                                <p class="card-text">R$ {{ obj.price }}</p>
+                                <a target="_blank"
+                                   href="https://wa.me/+5587996230399/?text=Olá, gostaria de obter um(a) {{ obj.name }}, por R${{ obj.price }}"
+                                   class="btn btn-primary">Comprar</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+{% endblock content %}

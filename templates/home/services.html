@@ -1,0 +1,77 @@
+{% extends 'core/layout/base.html' %}
+{% block content %}
+    <section class="ftco-section ftco-no-pt ftco-no-pb">
+        <div class="container">
+            <div class="row d-flex no-gutters">
+                <div class="col-md-5 d-flex"></div>
+                <div class="col-md-7 pl-md-5 py-md-5">
+                    <div class="heading-section pt-md-5">
+                        <h2 class="mb-4">Por que escolher nossos serviços?</h2>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6 services-2 w-100 d-flex">
+                            <div class="icon d-flex align-items-center justify-content-center"><span
+                                    class="flaticon-pawprint"></span></div>
+                            <div class="text pl-3">
+                                <h4>Foco</h4>
+                                <p>Temos nosso foco especialmente no seu pet, nada de propragandas enganosas.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 services-2 w-100 d-flex">
+                            <div class="icon d-flex align-items-center justify-content-center"><span
+                                    class="flaticon-customer-service"></span></div>
+                            <div class="text pl-3">
+                                <h4>Suporte</h4>
+                                <p>Estamos disponíveis nos mais diversos horários, para sempre poder te atender na
+                                    melhor hora e forma possível.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 services-2 w-100 d-flex">
+                            <div class="icon d-flex align-items-center justify-content-center"><span
+                                    class="flaticon-grooming"></span></div>
+                            <div class="text pl-3">
+                                <h4>Beleza</h4>
+                                <p>Queremos que seu pet fique com o visual exatamente como escolhido.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 services-2 w-100 d-flex">
+                            <div class="icon d-flex align-items-center justify-content-center"><span
+                                    class="flaticon-dog-eating"></span></div>
+                            <div class="text pl-3">
+                                <h4>Cuidado</h4>
+                                <p>Nos temos a obrigação de manter o maior cuidado com o seu pet enquanto ele estiver
+                                    sobre nossa supervisão.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="d-flex flex-wrap mb-5 pb-5">
+                {% for service in object_list %}
+                    <div class="col-md-4 d-flex align-self-stretch px-4 ftco-animate" style="margin-bottom: 120px">
+                        <div class="d-block services text-center">
+                            <div class="icon d-flex align-items-center justify-content-center">
+                                <span class="flaticon-grooming"></span>
+                            </div>
+                            <div class="media-body p-4">
+                                <h3 class="heading">{{ service.service }}</h3>
+                                <p>{{ service.description }}</p>
+                                <form action="{% url 'home:register-schedule' %}" method="GET">
+                                    <input type="hidden" name="service" value="{{ service.id }}">
+                                    <input type="hidden" name="next" value="{% url 'home:register-schedule' %}">
+                                    <button type="submit" class="btn btn-custom d-flex align-items-center justify-content-center"><span
+                                        class="fa fa-chevron-right"></span><i class="sr-only">Read more</i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+    </section>
+{% endblock content %}
