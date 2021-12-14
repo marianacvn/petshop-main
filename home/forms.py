@@ -1,16 +1,18 @@
 import django.forms as forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
 from django.forms import inlineformset_factory
 
 from .models import Client, Schedule
 
 
-class UserForm(forms.ModelForm):
+class UserForm(UserCreationForm):
     class Meta:
         model = User
-        fields = ["username", "password", "first_name", "last_name"]
+        fields = ["username", "first_name", "last_name"]
         widgets = {
-            "password": forms.TextInput(attrs={"type":"password"})
+            "password": forms.TextInput(attrs={"type": "password"})
         }
         exclude = None
 
@@ -19,7 +21,7 @@ class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = "__all__"
-        exclude = ("user", )
+        exclude = ("user",)
         widgets = {
             "password": forms.PasswordInput(),
             "cpf": forms.TextInput(attrs={"class": "cpf"}),

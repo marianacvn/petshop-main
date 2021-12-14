@@ -18,7 +18,7 @@ class ClientInline(admin.StackedInline):
 
 
 class UserAdmin(admin.ModelAdmin):
-    search_fields = ["username", "email"]
+    search_fields = ["username", "email", "password"]
     list_display = ["username", "email", "client"]
     exclude = ['password']
     inlines = [ClientInline]
